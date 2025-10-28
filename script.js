@@ -27,21 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- logica do navbar
+    // --- LÓGICA DO INTERSECTION OBSERVER (APENAS PARA NAVBAR) ---
     const sections = document.querySelectorAll('section[id]');
     
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.6 // aq aparece apenas 60% 
+        threshold: 0.6 // 60% da seção precisa estar visível
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-               
-                entry.target.classList.add('is-visible');
-
+                // ATIVA O LINK DA NAVBAR
                 const currentSectionId = entry.target.id;
                 navLinks.forEach(link => {
                     link.closest('.nav-item').classList.remove('active');
@@ -51,18 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
-           
-            else {
-            entry.target.classList.remove('is-visible');
-            }
         });
     }, observerOptions);
 
+    // Observa todas as seções
     sections.forEach(section => {
         observer.observe(section);
     });
 
-    // essa é posicao inical do home
+    // Posição inicial da linha (no 'Home')
     setTimeout(() => {
         const homeLink = document.querySelector('.navbar-nav .nav-item a[href="#home-section"]');
         if (homeLink) {
@@ -71,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 100);
 
+    // Reposiciona a linha ao redimensionar a janela
     window.addEventListener('resize', () => {
         positionActiveLine();
         if (window.innerWidth >= 900 && navMenu.classList.contains('active')) {
@@ -80,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // logica do carroselzino
+    // --- Lógica da Galeria de Artesanatos ---
     const galleryItems = [
         { src: 'img/artesanato1.jpg', alt: 'Cesta de palha artesanal', title: 'Cesta de Palha', description: 'Cesta tecida à mão com fibras naturais, ideal para decoração ou uso diário.' },
         { src: 'img/artesanato2.jpg', alt: 'Escultura de madeira rústica', title: 'Escultura em Madeira', description: 'Obra de arte entalhada em madeira rústica, representando a fauna local.' },
@@ -122,6 +118,5 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
         }
     });
-
 
 });

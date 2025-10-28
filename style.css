@@ -21,6 +21,7 @@ body::after {
   right: -250px;
   width: 800px;
   height: 800px;
+  background: url('img/back-logo.png') no-repeat center/contain;
   opacity: 0.1;
   pointer-events: none;
   z-index: -1;
@@ -32,6 +33,7 @@ a {
   font-weight: 600;
 }
 
+/* --- Header e Navbar --- */
 .header {
   position: sticky;
   top: 0;
@@ -136,24 +138,42 @@ a {
     display: none;
 }
 
-
+/* --- ESTILO DOS CONTAINERS (NÃO MAIS 100vh) --- */
 .content-section {
-  min-height: 100vh;
+  /* min-height: 100vh; <- REMOVIDO DAQUI */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px;
+  padding: 80px 20px; /* Padding padrão */
   box-sizing: border-box;
   color: #592507;
-  
-  overflow: hidden; 
 }
 
+/* APENAS A SEÇÃO HOME TERÁ TELA CHEIA */
+#home-section {
+  min-height: 100vh; 
+  text-align: center;
+}
+
+/* Conteúdo da seção Home (título principal) */
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #592507;
+}
+.hero-content p {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Fundos alternados para criar a divisão */
 #home-section {
   background-color: #F9F7D3;
 }
 #sobre-section {
-  background-color: #f0eecf;
+  background-color: #f0eecf; 
 }
 #eventos-section {
   background-color: #F9F7D3;
@@ -172,17 +192,29 @@ a {
   text-align: center;
 }
 
+/* Estilos de texto padrão para as seções */
 .content-section h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
-
+.content-section h2 {
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(89, 37, 7, 0.2);
+    padding-bottom: 5px;
+}
 .content-section p, .content-section ul, .content-section li {
   font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 10px;
 }
+.content-section ul {
+    list-style-position: inside;
+    padding-left: 10px;
+}
 
+/* Layout "Sobre Nós" */
 .sobre-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -190,45 +222,15 @@ a {
   gap: 30px;
 }
 
-.sobre-text, .sobre-image {
+.sobre-text {
   flex: 1;
 }
-
 .sobre-image {
-  margin: 0 30px;
-  right: 40px;
+  flex: 1;
+  text-align: center; /* Centraliza a imagem no mobile */
 }
 
-.content-section h1,
-.content-section h2,
-.content-section p,
-.sobre-image,
-.artesanatos-gallery {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-
-.content-section.is-visible h1,
-.content-section.is-visible h2,
-.content-section.is-visible p,
-.content-section.is-visible .sobre-image,
-.content-section.is-visible .artesanatos-gallery {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-.content-section.is-visible p {
-  transition-delay: 0.2s;
-}
-.content-section.is-visible .sobre-image,
-.content-section.is-visible .artesanatos-gallery {
-  transition-delay: 0.3s;
-}
-
-
+/* --- Galeria de Artesanatos --- */
 .artesanatos-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -249,7 +251,7 @@ a {
 .gallery-item img { max-width: 100%; height: 120px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
 .gallery-item h3 { font-size: 1.1rem; color: #592507; margin: 0; }
 
-/* modal do carroselzin*/
+/* Modal da Galeria */
 .gallery-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); padding-top: 60px; }
 .modal-content { margin: 5% auto; background-color: #fefefe; padding: 20px; border-radius: 10px; width: 80%; max-width: 600px; text-align: center; position: relative; }
 .modal-content img { max-width: 90%; height: auto; max-height: 400px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; }
@@ -259,7 +261,7 @@ a {
 .close-button:hover, .close-button:focus { color: #592507; text-decoration: none; cursor: pointer; }
 
 
-/* rodapézin*/
+/* --- Footer --- */
 footer {
   width: 100%;
   background-color: rgba(153, 121, 88, 1);
@@ -280,7 +282,7 @@ footer {
 footer a { color: #F9F7D3; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
-/* parte pra notebook*/
+/* --- Media Query para Telas Maiores (Desktop) --- */
 @media (min-width: 900px) {
   .header {
     position: sticky;
@@ -344,17 +346,23 @@ footer a:hover { text-decoration: underline; }
   }
 
   .content-section {
-    padding: 100px 40px;
-  }
-
-  .content-section h1 {
-    font-size: 3.5rem;
+    padding: 100px 40px; /* Mais padding no desktop */
   }
   
+  .hero-content h1 {
+      font-size: 3.5rem; /* Título principal maior no desktop */
+      max-width: 800px; /* Limita a largura do título */
+      margin: 0 auto 20px auto;
+  }
+
+  /* Layout "Sobre" lado a lado no desktop */
   .sobre-content-wrapper {
     flex-direction: row;
     text-align: left;
-    align-items: center;
+    align-items: flex-start; /* Alinha pelo topo */
+  }
+  .sobre-image {
+      text-align: right; /* Alinha a imagem à direita */
   }
 
   footer {
